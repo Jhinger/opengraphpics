@@ -9,6 +9,11 @@ export default $config({
 		};
 	},
 	async run() {
-		new sst.aws.SvelteKit('ByteBiteWebApp');
+		const googleClientId = new sst.Secret('GoogleClientId');
+		const googleClientSecret = new sst.Secret('GoogleClientSecret');
+
+		new sst.aws.SvelteKit('ByteBiteWebApp', {
+			link: [googleClientId, googleClientSecret]
+		});
 	}
 });

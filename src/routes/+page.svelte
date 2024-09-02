@@ -1,5 +1,4 @@
 <script>
-	import Login from '$components/auth/login.svelte';
 </script>
 
 <svelte:head>
@@ -7,5 +6,5 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<div>Testing</div>
-<Login />
+<div>ByteBite Landing Page</div>
+<a href="/login" class="hover:text-red-500">Login</a>
