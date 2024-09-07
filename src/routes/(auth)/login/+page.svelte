@@ -6,13 +6,12 @@
 </script>
 
 <div class="w-full lg:grid lg:min-h-screen lg:grid-cols-2">
-	<div class="flex items-center justify-center py-12">
+	<div
+		class="flex items-center justify-center py-12 bg-gradient-to-br from-sky-100 via-white to-pink-100"
+	>
 		<div class="mx-auto grid w-[350px] gap-6">
 			<div class="grid gap-2 text-center">
 				<h1 class="text-3xl font-bold">Login</h1>
-				<p class="text-muted-foreground text-balance">
-					Enter your email below to login to your account
-				</p>
 			</div>
 			<div class="grid gap-4">
 				<div class="grid gap-2">
@@ -40,6 +39,7 @@
 						class="w-full flex flex-row gap-2 hover:ring-2 hover:ring-offset-2 hover:ring-sky-500 transition-all duration-150"
 					>
 						<GoogleIcon className="w-5 h-5" />
+						Sign in with Google
 					</Button>
 				</a>
 			</div>

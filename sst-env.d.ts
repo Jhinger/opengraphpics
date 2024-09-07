@@ -15,6 +15,10 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
+    "JwtSecret": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
   }
 }
 export {}

@@ -11,6 +11,7 @@ export default $config({
 	async run() {
 		const googleClientId = new sst.Secret('GoogleClientId');
 		const googleClientSecret = new sst.Secret('GoogleClientSecret');
+		const jwtSecret = new sst.Secret('JwtSecret');
 
 		new sst.aws.SvelteKit('ByteBiteWebApp', {
 			link: [googleClientId, googleClientSecret]
