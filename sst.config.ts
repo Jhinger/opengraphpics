@@ -3,9 +3,14 @@
 export default $config({
 	app(input) {
 		return {
-			name: 'bytebite',
+			name: 'opengraphpics',
 			removal: input?.stage === 'production' ? 'retain' : 'remove',
-			home: 'aws'
+			home: 'aws',
+			providers: {
+				aws: {
+					region: 'us-east-2'
+				}
+			}
 		};
 	},
 	async run() {
@@ -13,8 +18,16 @@ export default $config({
 		const googleClientSecret = new sst.Secret('GoogleClientSecret');
 		const jwtSecret = new sst.Secret('JwtSecret');
 
-		new sst.aws.SvelteKit('ByteBiteWebApp', {
-			link: [googleClientId, googleClientSecret]
+		const db = new sst.aws.Dynamo('OpenGraphPicsDB', {
+			fields: {
+				pk: 'string',
+				sk: 'string'
+			},
+			primaryIndex: { hashKey: 'pk', rangeKey: 'sk' }
+		});
+
+		new sst.aws.SvelteKit('OpenGraphPicsApp', {
+			link: [db, googleClientId, googleClientSecret, jwtSecret]
 		});
 	}
 });

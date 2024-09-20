@@ -49,6 +49,9 @@ const config = {
 					foreground: 'hsl(var(--card-foreground) / <alpha-value>)'
 				}
 			},
+			fontSize: {
+				smplus: '0.925rem'
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

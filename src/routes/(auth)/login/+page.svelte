@@ -2,8 +2,14 @@
 	import { Button } from '$components/ui/button/index.js';
 	import { Input } from '$components/ui/input/index.js';
 	import { Label } from '$components/ui/label/index.js';
+	import { Separator } from '$components/ui/separator';
 	import GoogleIcon from '$icons/google-icon.svelte';
 </script>
+
+<svelte:head>
+	<title>OpenGraphPics | Login</title>
+	<meta name="description" content="Login to OpenGraphPics" />
+</svelte:head>
 
 <div class="w-full lg:grid lg:min-h-screen lg:grid-cols-2">
 	<div
@@ -12,6 +18,7 @@
 		<div class="mx-auto grid w-[350px] gap-6">
 			<div class="grid gap-2 text-center">
 				<h1 class="text-3xl font-bold">Login</h1>
+				<span class="text-sm text-gray-400">Enter your username and password to continue.</span>
 			</div>
 			<div class="grid gap-4">
 				<div class="grid gap-2">
@@ -28,18 +35,25 @@
 							Forgot your password?
 						</a>
 					</div>
-					<Input id="password" type="password" required />
+					<div class="relative">
+						<Input id="password" type="password" required />
+					</div>
 				</div>
 				<Button type="submit" class="w-full bg-sky-400 hover:bg-sky-500 duration-150 font-medium">
 					Login
 				</Button>
+				<div class="flex flex-row justify-center items-center gap-2 w-full">
+					<Separator class="flex-1" />
+					<span class="text-xs text-gray-400 whitespace-nowrap">Or login with</span>
+					<Separator class="flex-1" />
+				</div>
 				<a href="/oauth/google/">
 					<Button
 						variant="outline"
 						class="w-full flex flex-row gap-2 hover:ring-2 hover:ring-offset-2 hover:ring-sky-500 transition-all duration-150"
 					>
 						<GoogleIcon className="w-5 h-5" />
-						Sign in with Google
+						Google
 					</Button>
 				</a>
 			</div>
@@ -59,7 +73,7 @@
 		/>
 		<div class="absolute top-5 left-10">
 			<a href="/" class="text-2xl text-white font-gochi font-black hover:text-sky-400 duration-150">
-				ByteBite
+				opengraph.pics
 			</a>
 		</div>
 		<div

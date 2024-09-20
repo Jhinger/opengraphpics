@@ -6,5 +6,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	locals.authorizer = new Authorizer(cookies);
 
-	return await resolve(event);
+	const response = await resolve(event);
+	// response.headers.set('cache-control', 'no-cache');
+	return response;
 };

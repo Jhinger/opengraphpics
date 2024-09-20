@@ -1,21 +1,43 @@
 import { Resource } from 'sst';
 import jsonwebtoken from 'jsonwebtoken';
-import type { Cookies, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
+import type { JwtPayload } from 'jsonwebtoken';
+import type { Cookies } from '@sveltejs/kit';
+import type { Maybe, User } from '$types';
 
 export class Authorizer {
-	private readonly user?: any;
+	private readonly decrypted_user?: Maybe<JwtPayload | User>;
 
 	constructor(cookies: Cookies) {
-		const token = cookies.get('access_token');
-		if (!token) return;
+		const token = cookies.get('user_token');
+		if (!token) {
+			this.decrypted_user = null;
+			return;
+		}
 
 		try {
-			this.user = jsonwebtoken.verify(token, Resource.JwtSecret.value, {
-				algorithms: ['HS256'],
-				complete: true
-			}).payload;
+			this.decrypted_user =
+				(jsonwebtoken.verify(token, Resource.JwtSecret.value, {
+					algorithms: ['HS256'],
+					complete: true
+				}).payload as JwtPayload | User) ?? null;
 		} catch (err) {
-			this.user = null;
+			this.decrypted_user = null;
 		}
 	}
+
+	get user() {
+		return this.decrypted_user;
+	}
+
+	isAuthenticated() {
+		if (this.decrypted_user === undefined || this.decrypted_user === null) {
+			redirect(302, '/login');
+		}
+		return this;
+	}
+
+	// TODO: Implement the roles that can exist.
+	isAdmin() {}
+	hasRole(role: string) {}
 }

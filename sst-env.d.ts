@@ -3,10 +3,6 @@
 import "sst"
 declare module "sst" {
   export interface Resource {
-    "ByteBiteWebApp": {
-      "type": "sst.aws.SvelteKit"
-      "url": string
-    }
     "GoogleClientId": {
       "type": "sst.sst.Secret"
       "value": string
@@ -18,6 +14,14 @@ declare module "sst" {
     "JwtSecret": {
       "type": "sst.sst.Secret"
       "value": string
+    }
+    "OpenGraphPicsApp": {
+      "type": "sst.aws.SvelteKit"
+      "url": string
+    }
+    "OpenGraphPicsDB": {
+      "name": string
+      "type": "sst.aws.Dynamo"
     }
   }
 }
