@@ -1,5 +1,3 @@
-import { fontFamily } from 'tailwindcss/defaultTheme';
-
 /** @type {import('tailwindcss').Config} */
 const config = {
 	darkMode: ['class'],
@@ -58,9 +56,12 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans],
 				inter: ['Inter', 'monospace'],
-				gochi: ['Gochi Hand', 'cursive']
+				gochi: ['Gochi Hand', 'cursive'],
+				sans: ['Inter'],
+				manrope: ['Manrope', 'sans-serif'],
+				roboto: ['Roboto', 'sans-serif'],
+				outfit: ['Outfit', 'sans-serif']
 			}
 		}
 	}

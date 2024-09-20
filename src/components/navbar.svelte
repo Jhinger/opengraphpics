@@ -15,7 +15,7 @@
 		class="font-gochi font-bold text-xl hover:cursor-pointer hover:text-sky-500 duration-150"
 		>OpenGraph.pics</a
 	>
-	<div class="flex flex-row gap-12 text-smplus font-semibold tracking-tight">
+	<div class="flex flex-row gap-12 text-smplus font-semibold">
 		<span class="hover:cursor-pointer hover:text-sky-500 duration-150">FAQ</span>
 		<span class="hover:cursor-pointer hover:text-sky-500 duration-150">settings</span>
 		<span class="hover:cursor-pointer hover:text-sky-500 duration-150">share</span>
