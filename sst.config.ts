@@ -18,6 +18,21 @@ export default $config({
 		const googleClientSecret = new sst.Secret('GoogleClientSecret');
 		const jwtSecret = new sst.Secret('JwtSecret');
 
+		const bucket = new sst.aws.Bucket('OpenGraphPicsBucket', {
+			access: 'cloudfront',
+			transform: {
+				bucket: (args) => {
+					args.forceDestroy = $app.stage !== 'production';
+				}
+			}
+		});
+		new aws.s3.BucketVersioningV2('OpenGraphPicsBucketVersioning', {
+			bucket: bucket.name,
+			versioningConfiguration: {
+				status: 'Enabled'
+			}
+		});
+
 		const db = new sst.aws.Dynamo('OpenGraphPicsDB', {
 			fields: {
 				pk: 'string',
@@ -26,8 +41,25 @@ export default $config({
 			primaryIndex: { hashKey: 'pk', rangeKey: 'sk' }
 		});
 
-		new sst.aws.SvelteKit('OpenGraphPicsApp', {
-			link: [db, googleClientId, googleClientSecret, jwtSecret]
+		const app = new sst.aws.SvelteKit('OpenGraphPicsApp', {
+			link: [db, bucket, googleClientId, googleClientSecret, jwtSecret]
 		});
+
+		const router = new sst.aws.Router('OpenGraphPicsDistributionRouter', {
+			routes: {
+				'/*': app.url,
+				'/assets/*': {
+					bucket: bucket,
+					rewrite: {
+						regex: '^/assets/(.*)$',
+						to: '/$1'
+					}
+				}
+			}
+		});
+
+		return {
+			router: router.url
+		};
 	}
 });

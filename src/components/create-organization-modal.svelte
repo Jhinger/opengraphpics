@@ -3,9 +3,9 @@
 	import { Input } from '$components/ui/input';
 	import { Button } from '$components/ui/button';
 	import * as Dialog from '$components/ui/dialog';
+	import { buttonVariants } from '$components/ui/button';
 	import CreateNewFolderIcon from 'virtual:icons/mdi/create-new-folder-outline';
 	import FileUploadIcon from 'virtual:icons/mdi/file-upload-outline';
-	import { buttonVariants } from '$components/ui/button';
 	import { toast } from 'svelte-sonner';
 	import { cn } from '$lib/utils';
 	import { MAX_FILE_ICON_SIZE, MAX_FILE_THUMBNAIL_SIZE, BYTES_IN_MB } from '$constants';
@@ -97,6 +97,7 @@
 					name="organization"
 					type="text"
 					placeholder="Organization Name"
+					autocomplete="off"
 					required
 				/>
 			</div>
@@ -180,7 +181,7 @@
 						class="flex flex-col gap-1 justify-start items-center px-4 pt-2 relative -top-3 w-full h-[5rem] bg-gray-200 rounded-b-md"
 					>
 						<span class="font-bold text-sm text-black w-full"
-							>{organizationName} | Example Heading</span
+							>{organizationName} - Example Heading</span
 						>
 						<span class="text-xs text-gray-500 w-full">
 							This image will be used as the default thumbnail for routes that don't have a

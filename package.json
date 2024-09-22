@@ -9,6 +9,8 @@
 		"dev": "vite dev",
 		"push:staging": "sst deploy --stage staging",
 		"push:production": "sst deploy --stage production",
+		"remove:dev": "sst remove",
+		"remove:staging": "sst remove --stage staging",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"preview": "vite preview"
@@ -22,7 +24,7 @@
 		"jsonwebtoken": "^8.5.1",
 		"lucide-svelte": "^0.441.0",
 		"oslo": "^1.2.1",
-		"sst": "3.0.75",
+		"sst": "^3.1.32",
 		"svelte-kit-sst": "^2.43.5",
 		"svelte-sonner": "^0.3.28",
 		"tailwind-merge": "^2.5.2",
