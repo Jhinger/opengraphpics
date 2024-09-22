@@ -3,9 +3,18 @@
 	import OrganizationCard from '$components/organization-card.svelte';
 	import { Separator } from '$components/ui/separator';
 	import CreateOrganizationModal from '$components/create-organization-modal.svelte';
-	import type { PageData } from './$types';
+	import type { PageData, ActionData } from './$types';
+	import { toast } from 'svelte-sonner';
 
-	const { data } = $props<{ data: PageData }>();
+	const { data, form } = $props<{ data: PageData; form: ActionData }>();
+
+	$effect(() => {
+		if (form?.success) {
+			toast.success('Organization has been created.', { description: form?.message });
+		} else if (form?.success === false) {
+			toast.error('Failed to create organization.', { description: form?.message });
+		}
+	});
 </script>
 
 <div class="flex justify-center items-center">

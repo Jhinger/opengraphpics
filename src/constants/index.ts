@@ -1,0 +1,4 @@
+export const MAX_FILE_ICON_SIZE = 1000000;
+export const MAX_FILE_THUMBNAIL_SIZE = 2000000;
+
+export const BYTES_IN_MB = 1000000;

@@ -7,6 +7,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"dev": "vite dev",
+		"push:staging": "sst deploy --stage staging",
+		"push:production": "sst deploy --stage production",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"preview": "vite preview"
@@ -22,6 +24,7 @@
 		"oslo": "^1.2.1",
 		"sst": "3.0.75",
 		"svelte-kit-sst": "^2.43.5",
+		"svelte-sonner": "^0.3.28",
 		"tailwind-merge": "^2.5.2",
 		"tailwind-variants": "^0.2.1"
 	},

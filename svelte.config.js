@@ -13,6 +13,7 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$components: './src/components',
+			$constants: './src/constants',
 			$icons: './src/icons',
 			$lib: './src/lib',
 			$stores: './src/stores',
