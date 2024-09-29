@@ -23,4 +23,14 @@ export type Organization = {
 	plan: string;
 };
 
+export type UserOrganization = {
+	organization: string;
+	role: string | undefined;
+};
+
+export type OrganizationMetadata = UserOrganization & {
+	numMembers: string;
+	plan: string;
+};
+
 export type Maybe<T> = T | null;

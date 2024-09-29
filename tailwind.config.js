@@ -48,6 +48,7 @@ const config = {
 				}
 			},
 			fontSize: {
+				xxs: '0.7rem',
 				smplus: '0.925rem'
 			},
 			borderRadius: {

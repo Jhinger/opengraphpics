@@ -3,7 +3,9 @@
 	import { Input } from '$components/ui/input';
 	import { Button } from '$components/ui/button';
 	import * as Dialog from '$components/ui/dialog';
+	import LoadingSpinner from '$components/loading-spinner.svelte';
 	import { buttonVariants } from '$components/ui/button';
+	import { enhance } from '$app/forms';
 	import CreateNewFolderIcon from 'virtual:icons/mdi/create-new-folder-outline';
 	import FileUploadIcon from 'virtual:icons/mdi/file-upload-outline';
 	import { toast } from 'svelte-sonner';
@@ -12,14 +14,34 @@
 
 	let fileName = $state('');
 	let organizationName = $state('');
+	let organizationDomain = $state('');
 	let thumbnailImage = $state<HTMLImageElement | null>(null);
 	let showImage = $state(false);
 	let isIconValidSize = $state(true);
 	let isThumbnailValidSize = $state(true);
+	let isCreating = $state(false);
 
 	$effect(() => {
 		thumbnailImage = new Image();
 	});
+
+	function formatOrganizationName(event: Event) {
+		const target = event.target as HTMLInputElement;
+		organizationName = target.value.trim().toLowerCase().replace(/\s+/g, '');
+	}
+
+	function formatDomainName(event: Event) {
+		const target = event.target as HTMLInputElement;
+		organizationDomain = organizationDomain.replace(/^(https?:\/\/)?(www\.)?/, '');
+		organizationDomain = organizationDomain.replace(/\/$/, '');
+		const domainRegex = /^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
+
+		if (domainRegex.test(organizationDomain)) {
+			target.setCustomValidity('');
+		} else {
+			target.setCustomValidity("Invalid domain name - try format like: 'opengraph.pics'");
+		}
+	}
 
 	const handleIconUpload = (event: Event) => {
 		const target = event.target as HTMLInputElement;
@@ -78,25 +100,43 @@
 	<Dialog.Content>
 		<Dialog.Header>
 			<Dialog.Title>Create an Organization</Dialog.Title>
-			<Dialog.Description class="pt-2">
-				Fill in the details to create a new organization. Once created, you’ll be able to invite
-				collaborators, set permissions, and select a plan appropriate for your organizations needs.
-			</Dialog.Description>
 		</Dialog.Header>
 		<form
-			class="pt-3 flex flex-col gap-6"
-			method="POST"
+			class="pt-3 flex flex-col gap-4"
+			method="post"
 			action="/dashboard?/create"
 			enctype="multipart/form-data"
+			use:enhance={() => {
+				isCreating = true;
+				return async ({ update }) => {
+					await update();
+					isCreating = false;
+				};
+			}}
 		>
 			<div class="flex flex-col justify-start gap-2">
+				<!-- //TODO: Verify if the organization name is available -->
 				<Label for="name" class="font-semibold text-sm">Name</Label>
 				<Input
 					bind:value={organizationName}
+					on:input={formatOrganizationName}
 					id="name"
 					name="organization"
 					type="text"
 					placeholder="Organization Name"
+					autocomplete="off"
+					required
+				/>
+			</div>
+			<div class="flex flex-col justify-start gap-2">
+				<Label for="domain" class="font-semibold text-sm">Domain</Label>
+				<Input
+					bind:value={organizationDomain}
+					oninput={formatDomainName}
+					id="domain"
+					name="domain"
+					type="text"
+					placeholder="example: 'opengraph.pics'"
 					autocomplete="off"
 					required
 				/>
@@ -181,7 +221,7 @@
 						class="flex flex-col gap-1 justify-start items-center px-4 pt-2 relative -top-3 w-full h-[5rem] bg-gray-200 rounded-b-md"
 					>
 						<span class="font-bold text-sm text-black w-full"
-							>{organizationName} - Example Heading</span
+							>{organizationDomain} - Example Title</span
 						>
 						<span class="text-xs text-gray-500 w-full">
 							This image will be used as the default thumbnail for routes that don't have a
@@ -194,8 +234,13 @@
 				variant="default"
 				type="submit"
 				class="bg-sky-400 hover:bg-sky-500 hover:ring-2 hover:ring-sky-500 hover:ring-offset-white hover:ring-offset-2 duration-150 transition-all"
-				>Create</Button
 			>
+				{#if isCreating}
+					<LoadingSpinner />
+				{:else}
+					Create
+				{/if}
+			</Button>
 		</form>
 	</Dialog.Content>
 </Dialog.Root>

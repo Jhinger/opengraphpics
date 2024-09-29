@@ -14,6 +14,10 @@ export function initials(name: string) {
 		.join('');
 }
 
+export function assetPath(path: string) {
+	return `https://dvvoc3l8fowfh.cloudfront.net${path}`;
+}
+
 type FlyAndScaleParams = {
 	y?: number;
 	x?: number;
@@ -61,4 +65,3 @@ export const flyAndScale = (
 		easing: cubicOut
 	};
 };
-

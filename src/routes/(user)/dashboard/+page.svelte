@@ -11,8 +11,14 @@
 	$effect(() => {
 		if (form?.success) {
 			toast.success('Organization has been created.', { description: form?.message });
-		} else if (form?.success === false) {
+		} else if (form?.tooLarge) {
 			toast.error('Failed to create organization.', { description: form?.message });
+		} else if (form?.missing) {
+			toast.error('Failed to create organization', { description: form?.message });
+		} else if (form?.uploadFailed) {
+			toast.error('Failed tot create organization', { description: form?.message });
+		} else if (form?.unprocessedItems) {
+			toast.error('Failed to create organization', { description: form?.message });
 		}
 	});
 </script>
@@ -27,8 +33,11 @@
 		<div
 			class="flex flex-row gap-4 justify-start items-center w-full h-[13rem] mt-5 bg-gray-200 rounded-md p-4"
 		>
-			<OrganizationCard />
-			<OrganizationCard />
+			{#each data?.organizationsMetadata as organization}
+				<OrganizationCard {organization} />
+			{:else}
+				<span>No Organizations</span>
+			{/each}
 		</div>
 		<div class="w-full py-2">
 			<h1 class="text-lg font-black px-4 mt-4">Invitations</h1>
