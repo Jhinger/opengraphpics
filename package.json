@@ -32,8 +32,6 @@
 		"tailwind-variants": "^0.2.1"
 	},
 	"devDependencies": {
-		"@fontsource/fira-mono": "^5.0.0",
-		"@fontsource/gochi-hand": "^5.0.20",
 		"@fontsource/outfit": "^5.1.0",
 		"@iconify-json/mdi": "^1.2.0",
 		"@iconify-json/noto-v1": "^1.2.0",

@@ -72,7 +72,7 @@
 			class="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
 		/>
 		<div class="absolute top-5 left-10">
-			<a href="/" class="text-2xl text-white font-gochi font-black hover:text-sky-400 duration-150">
+			<a href="/" class="text-2xl text-white font-black hover:text-sky-400 duration-150">
 				opengraph.pics
 			</a>
 		</div>

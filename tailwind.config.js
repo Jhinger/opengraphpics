@@ -58,9 +58,7 @@ const config = {
 			},
 			fontFamily: {
 				inter: ['Inter', 'monospace'],
-				gochi: ['Gochi Hand', 'cursive'],
 				sans: ['Inter'],
-				manrope: ['Manrope', 'sans-serif'],
 				roboto: ['Roboto', 'sans-serif'],
 				outfit: ['Outfit', 'sans-serif']
 			}

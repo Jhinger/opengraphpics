@@ -11,7 +11,8 @@
 	}>();
 </script>
 
-<div
+<a
+	href={`/${organization.organization}`}
 	class={cn(
 		'relative flex flex-col h-full w-[15rem] bg-white rounded-md hover:cursor-pointer hover:ring-2 hover:ring-slate-400 duration-150',
 		className
@@ -33,7 +34,7 @@
 			<span class="text-xxs text-gray-400">{organization.numMembers} Member(s)</span>
 		</div>
 		<div
-			class="absolute inset-0 bg-gradient-to-r from-transparent via-black/60 to-black opacity-90"
+			class="absolute inset-0 bg-gradient-to-r from-transparent via-black/70 to-black opacity-90"
 		></div>
 		<img
 			src={assetPath(`/assets/${organization.organization}/thumbnail`)}
@@ -49,4 +50,4 @@
 		>
 		<span class="m-4 text-gray-400 font-medium text-xs">{organization.plan}</span>
 	</div>
-</div>
+</a>

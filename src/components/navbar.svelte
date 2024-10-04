@@ -10,9 +10,7 @@
 </script>
 
 <div class="w-full h-fit flex flex-row justify-between items-center px-8 py-4">
-	<a
-		href="/"
-		class="font-gochi font-bold text-xl hover:cursor-pointer hover:text-sky-500 duration-150"
+	<a href="/" class="font-bold text-lg hover:cursor-pointer hover:text-sky-500 duration-150"
 		>OpenGraph.pics</a
 	>
 	<div class="flex flex-row gap-12 text-smplus font-semibold">
