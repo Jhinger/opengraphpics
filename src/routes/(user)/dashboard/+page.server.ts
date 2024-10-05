@@ -1,6 +1,8 @@
 import createOrganization from '$queries/createOrganization';
 import { uploadImages } from '$lib/s3';
 import { redirect, fail } from '@sveltejs/kit';
+import { stripe } from '$lib/stripe';
+import createOrganizationPayment from '$queries/createOrganizationPayment';
 import { MAX_FILE_THUMBNAIL_SIZE, MAX_FILE_ICON_SIZE } from '$constants';
 import type { Actions } from './$types';
 
@@ -29,6 +31,13 @@ export const actions: Actions = {
 		}
 
 		await createOrganization(org, domain, locals.authorizer.user?.email);
+
+		const stripeCustomer = await stripe.customers.create({
+			name: org,
+			email: locals.authorizer.user?.email
+		});
+		await createOrganizationPayment(org, stripeCustomer.id);
+
 		const uploadResponse = uploadImages([
 			{
 				key: `${org}/icon`,
@@ -41,9 +50,12 @@ export const actions: Actions = {
 		]);
 
 		if (!uploadResponse.success)
-			return fail(400, { uploadFailed: true, message: 'Failed to upload some or all assets.' });
+			return fail(400, {
+				uploadFailed: true,
+				message: 'Failed to upload some or all assets - Organization is created without assets.'
+			});
 
-		// Invalidate the /dashboard route if redirecting back to the dashboard.
+		//TODO: Invalidate the /dashboard route if redirecting back to the dashboard.
 		return redirect(303, `/${org}`);
 	}
 } satisfies Actions;

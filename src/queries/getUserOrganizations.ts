@@ -3,7 +3,7 @@ import { QueryCommand } from '@aws-sdk/client-dynamodb';
 import { Resource } from 'sst';
 
 export default async function getUserOrganizations(userEmail?: string) {
-	if (!userEmail) return [];
+	if (userEmail === undefined || !userEmail) return [];
 
 	const params = {
 		TableName: Resource.OpenGraphPicsDB.name,
@@ -32,5 +32,6 @@ export default async function getUserOrganizations(userEmail?: string) {
 		return organizations;
 	} catch (error) {
 		console.log('Error getUserOrganizations: ', error);
+		return [];
 	}
 }

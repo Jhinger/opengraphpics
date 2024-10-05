@@ -14,22 +14,23 @@
 <a
 	href={`/${organization.organization}`}
 	class={cn(
-		'relative flex flex-col h-full w-[15rem] bg-white rounded-md hover:cursor-pointer hover:ring-2 hover:ring-slate-400 duration-150',
+		'relative flex h-full w-[15rem] flex-col rounded-md bg-white duration-150 hover:cursor-pointer hover:ring-2 hover:ring-slate-400',
 		className
 	)}
 >
 	<Avatar.Root
-		class="absolute top-1/2 bg-white left-5 transform -translate-y-1/2 ring-2 ring-white ring-offset-white z-10"
+		class="absolute left-5 top-1/2 z-10 -translate-y-1/2 transform bg-white ring-2 ring-white ring-offset-white"
 	>
 		<Avatar.Image
 			src={assetPath(`/assets/${organization.organization}/icon`)}
 			alt=""
 			draggable={false}
+			fetchpriority="high"
 		></Avatar.Image>
 		<Avatar.Fallback class="bg-gray-200"></Avatar.Fallback>
 	</Avatar.Root>
-	<div class="relative w-full h-full rounded-t-md overflow-hidden">
-		<div class="absolute right-4 top-3 flex flex-col justify-center items-center z-10">
+	<div class="relative h-full w-full overflow-hidden rounded-t-md">
+		<div class="absolute right-4 top-3 z-10 flex flex-col items-center justify-center">
 			<span class="text-sm text-white">{organization.organization}</span>
 			<span class="text-xxs text-gray-400">{organization.numMembers} Member(s)</span>
 		</div>
@@ -39,15 +40,16 @@
 		<img
 			src={assetPath(`/assets/${organization.organization}/thumbnail`)}
 			alt=""
-			class="w-full h-full object-cover rounded-t-md"
+			class="h-full w-full rounded-t-md object-cover"
+			fetchpriority="high"
 		/>
 	</div>
-	<div class="flex flex-row justify-between items-end w-full h-full">
+	<div class="flex h-full w-full flex-row items-end justify-between">
 		<Badge
 			variant="secondary"
-			class="m-4 text-xxs text-black bg-gray-200 hover:bg-gray-300 rounded-md capitalize"
+			class="m-4 rounded-md bg-gray-200 text-xxs capitalize text-black hover:bg-gray-300"
 			>{organization.role.toLowerCase()}</Badge
 		>
-		<span class="m-4 text-gray-400 font-medium text-xs">{organization.plan}</span>
+		<span class="m-4 text-xs font-medium text-gray-400">{organization.subscription}</span>
 	</div>
 </a>

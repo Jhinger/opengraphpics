@@ -17,6 +17,7 @@ export default $config({
 		const googleClientId = new sst.Secret('GoogleClientId');
 		const googleClientSecret = new sst.Secret('GoogleClientSecret');
 		const jwtSecret = new sst.Secret('JwtSecret');
+		const stripeSecret = new sst.Secret('StripeSecret');
 
 		const bucket = new sst.aws.Bucket('OpenGraphPicsBucket', {
 			access: 'cloudfront',
@@ -42,7 +43,7 @@ export default $config({
 		});
 
 		const app = new sst.aws.SvelteKit('OpenGraphPicsApp', {
-			link: [db, bucket, googleClientId, googleClientSecret, jwtSecret]
+			link: [db, bucket, googleClientId, googleClientSecret, jwtSecret, stripeSecret]
 		});
 
 		const router = new sst.aws.Router('OpenGraphPicsDistributionRouter', {

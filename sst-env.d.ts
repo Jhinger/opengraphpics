@@ -33,5 +33,9 @@ declare module "sst" {
       "type": "sst.aws.Router"
       "url": string
     }
+    "StripeSecret": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
   }
 }

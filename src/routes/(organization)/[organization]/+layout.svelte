@@ -12,7 +12,7 @@
 
 	<div class="flex-1 bg-gray-100 p-3">
 		<!-- White bubble content -->
-		<div class="w-full h-full overflow-auto bg-white rounded-lg drop-shadow-md p-4">
+		<div class="h-full w-full overflow-auto rounded-lg bg-white p-4 drop-shadow-md">
 			{JSON.stringify($page.params)}
 			{@render children()}
 		</div>

@@ -27,7 +27,7 @@ export default async function createOrganization(
 							pk: { S: `ORG#${organization}` },
 							sk: { S: `METADATA` },
 							numMembers: { N: '1' },
-							plan: { S: 'FREE' }
+							subscription: { S: 'FREE' }
 						}
 					}
 				},

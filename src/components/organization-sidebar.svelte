@@ -12,43 +12,43 @@
 	const user = getContext<User>('user');
 </script>
 
-<nav class="w-[15rem] bg-gray-100 h-screen py-6 flex flex-col justify-between items-center">
+<nav class="flex h-screen w-[15rem] flex-col items-center justify-between bg-gray-100 py-6">
 	<a
 		href="/dashboard"
-		class="font-bold w-full mb-6 flex flex-row justify-center items-center gap-2"
+		class="mb-6 flex w-full flex-row items-center justify-center gap-2 font-bold"
 	>
-		<div class="rounded-sm bg-sky-300 aspect-square w-6"></div>
+		<div class="aspect-square w-6 rounded-sm bg-sky-300"></div>
 		<span>OpenGraph.pics</span>
 	</a>
-	<div class="flex flex-col items-start w-full my-4 flex-grow">
-		<div class="font-bold text-gray-400 text-xxs uppercase mb-1 ml-8">General</div>
-		<div class="flex flex-col gap-1 text-gray-500 font-medium w-full pl-2">
+	<div class="my-4 flex w-full flex-grow flex-col items-start">
+		<div class="mb-1 ml-8 text-xxs font-bold uppercase text-gray-400">General</div>
+		<div class="flex w-full flex-col gap-1 pl-2 font-medium text-gray-500">
 			<a
 				href={`/${$page.params.organization}`}
-				class="flex gap-2 items-center hover:cursor-pointer hover:bg-gray-300 hover:text-black w-full rounded-md px-6 py-2 duration-75"
+				class="flex w-full items-center gap-2 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-300 hover:text-black"
 			>
-				<HomeIcon class="w-5 h-5" />
+				<HomeIcon class="h-5 w-5" />
 				<span>Dashboard</span>
 			</a>
 			<a
 				href={`/${$page.params.organization}/images`}
-				class="flex gap-2 items-center hover:cursor-pointer hover:bg-gray-300 hover:text-black w-full rounded-md px-6 py-2 duration-75"
+				class="flex w-full items-center gap-2 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-300 hover:text-black"
 			>
-				<ImageIcon class="w-5 h-5" />
+				<ImageIcon class="h-5 w-5" />
 				<span>Images</span>
 			</a>
 			<a
 				href={`/${$page.params.organization}/billing`}
-				class="flex gap-2 items-center hover:cursor-pointer hover:bg-gray-300 hover:text-black w-full rounded-md px-6 py-2 duration-75"
+				class="flex w-full items-center gap-2 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-300 hover:text-black"
 			>
-				<PaymentIcon class="w-5 h-5" />
+				<PaymentIcon class="h-5 w-5" />
 				<span>Billing</span>
 			</a>
 			<a
 				href={`/${$page.params.organization}/team`}
-				class="flex gap-2 items-center hover:cursor-pointer hover:bg-gray-300 hover:text-black w-full rounded-md px-6 py-2 duration-75"
+				class="flex w-full items-center gap-2 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-300 hover:text-black"
 			>
-				<PeopleIcon class="w-5 h-5" />
+				<PeopleIcon class="h-5 w-5" />
 				<span>Team</span>
 			</a>
 		</div>
@@ -57,13 +57,13 @@
 		<Avatar.Root>
 			<Avatar.Image src={user.picture} alt={user.name} draggable={false} />
 			<Avatar.Fallback class="bg-sky-200">
-				<span class="text-sky-800 text-smplus font-semibold hover:text-sky-500 duration-150"
+				<span class="text-smplus font-semibold text-sky-800 duration-150 hover:text-sky-500"
 					>{initials(user.name)}</span
 				>
 			</Avatar.Fallback>
 		</Avatar.Root>
 		<div class="flex flex-col">
-			<span class="font-semibold text-sm">{user.name}</span>
+			<span class="text-sm font-semibold">{user.name}</span>
 			<span class="text-xs text-gray-400">{user.email}</span>
 		</div>
 	</div>

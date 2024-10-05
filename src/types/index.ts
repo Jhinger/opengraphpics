@@ -20,7 +20,7 @@ export type Organization = {
 	icon: string;
 	banner: string;
 	numMembers: number;
-	plan: string;
+	subscription: string;
 };
 
 export type UserOrganization = {
@@ -30,7 +30,7 @@ export type UserOrganization = {
 
 export type OrganizationMetadata = UserOrganization & {
 	numMembers: string;
-	plan: string;
+	subscription: string;
 };
 
 export type Maybe<T> = T | null;

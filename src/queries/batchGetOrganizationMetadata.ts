@@ -6,7 +6,7 @@ import type { UserOrganization, OrganizationMetadata } from '$types';
 export default async function batchGetOrganizationMetadata(
 	userOrganizations: UserOrganization[] | undefined
 ) {
-	if (userOrganizations === undefined) return [];
+	if (userOrganizations === undefined || !userOrganizations.length) return [];
 
 	let lookup: Record<string, UserOrganization> = {};
 	const keys = userOrganizations.map((org) => {
@@ -34,7 +34,7 @@ export default async function batchGetOrganizationMetadata(
 			return {
 				...lookup[metadata!.pk!.S!.split('#')[1]],
 				numMembers: metadata.numMembers!.N!,
-				plan: metadata.plan!.S!
+				subscription: metadata.subscription!.S!
 			};
 		});
 
