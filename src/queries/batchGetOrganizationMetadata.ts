@@ -28,7 +28,7 @@ export default async function batchGetOrganizationMetadata(
 
 	try {
 		const response = await dbClient.send(new BatchGetItemCommand(params));
-		const organizationMetadata: OrganizationMetadata[] = response.Responses![
+		const organizationMetadata: Omit<OrganizationMetadata, 'domain'>[] = response.Responses![
 			Resource.OpenGraphPicsDB.name
 		].map((metadata) => {
 			return {
@@ -41,5 +41,6 @@ export default async function batchGetOrganizationMetadata(
 		return organizationMetadata;
 	} catch (error) {
 		console.log('Error batchGetOrganizationMetadata: ', error);
+		return [];
 	}
 }

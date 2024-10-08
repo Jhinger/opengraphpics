@@ -17,17 +17,10 @@ export default async function createOrganization(
 					PutRequest: {
 						Item: {
 							pk: { S: `ORG#${organization}` },
-							sk: { S: `DOMAIN#${domain}` }
-						}
-					}
-				},
-				{
-					PutRequest: {
-						Item: {
-							pk: { S: `ORG#${organization}` },
 							sk: { S: `METADATA` },
 							numMembers: { N: '1' },
-							subscription: { S: 'FREE' }
+							subscription: { S: 'FREE' },
+							domain: { S: domain }
 						}
 					}
 				},

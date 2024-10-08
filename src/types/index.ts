@@ -17,8 +17,6 @@ export type User = {
 
 export type Organization = {
 	name: string;
-	icon: string;
-	banner: string;
 	numMembers: number;
 	subscription: string;
 };
@@ -31,6 +29,13 @@ export type UserOrganization = {
 export type OrganizationMetadata = UserOrganization & {
 	numMembers: string;
 	subscription: string;
+	stripeCustomerId?: string;
+	domain: string;
+};
+
+export type OrganizationInvitation = {
+	userEmail: string;
+	invitedAt: string;
 };
 
 export type Maybe<T> = T | null;
