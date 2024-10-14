@@ -23,7 +23,8 @@ export default async function getOrganizationMetadata(organization: string) {
 			organization: organization,
 			numMembers: metadata.numMembers?.N,
 			stripeCustomerId: metadata.stripeCustomerId?.S,
-			subscription: metadata.subscription?.S,
+			stripeSubscriptionId: metadata?.stripeSubscriptionId?.S ?? '',
+			subscriptionStatus: metadata.subscriptionStatus?.S,
 			domain: metadata.domain?.S
 		} as OrganizationMetadata;
 	} catch (error) {

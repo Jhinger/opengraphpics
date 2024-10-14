@@ -1,4 +1,4 @@
-import type { User, Maybe } from '$types';
+import type { User } from '$types';
 
 export default function createUserContext(u: User | null) {
 	const user = $state({

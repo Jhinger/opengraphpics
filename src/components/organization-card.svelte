@@ -50,6 +50,8 @@
 			class="m-4 rounded-md bg-gray-200 text-xxs capitalize text-black hover:bg-gray-300"
 			>{organization.role.toLowerCase()}</Badge
 		>
-		<span class="m-4 text-xs font-medium text-gray-400">{organization.subscription}</span>
+		<span class="m-4 text-xs font-medium uppercase text-gray-400"
+			>{organization.subscriptionStatus}</span
+		>
 	</div>
 </a>

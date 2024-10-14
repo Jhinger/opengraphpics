@@ -8,6 +8,7 @@
 	import type { User } from '$types';
 	import { initials } from '$lib/utils';
 	import { page } from '$app/stores';
+	import { cn } from '$lib/utils';
 
 	const user = getContext<User>('user');
 </script>
@@ -22,31 +23,45 @@
 	</a>
 	<div class="my-4 flex w-full flex-grow flex-col items-start">
 		<div class="mb-1 ml-8 text-xxs font-bold uppercase text-gray-400">General</div>
-		<div class="flex w-full flex-col gap-1 pl-2 font-medium text-gray-500">
+		<div class="flex w-full flex-col gap-1 pl-2 text-smplus font-medium text-gray-500">
 			<a
 				href={`/${$page.params.organization}`}
-				class="flex w-full items-center gap-2 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-300 hover:text-black"
+				class={cn(
+					$page.url.pathname === `/${$page.params.organization}` && 'bg-sky-100 text-sky-700',
+					'flex w-full items-center gap-3 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-200 hover:text-black'
+				)}
 			>
 				<HomeIcon class="h-5 w-5" />
 				<span>Dashboard</span>
 			</a>
 			<a
 				href={`/${$page.params.organization}/images`}
-				class="flex w-full items-center gap-2 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-300 hover:text-black"
+				class={cn(
+					$page.url.pathname === `/${$page.params.organization}/images` &&
+						'bg-sky-100 text-sky-700',
+					'flex w-full items-center gap-3 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-200 hover:text-black'
+				)}
 			>
 				<ImageIcon class="h-5 w-5" />
 				<span>Images</span>
 			</a>
 			<a
 				href={`/${$page.params.organization}/billing`}
-				class="flex w-full items-center gap-2 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-300 hover:text-black"
+				class={cn(
+					$page.url.pathname === `/${$page.params.organization}/billing` &&
+						'bg-sky-100 text-sky-700',
+					'flex w-full items-center gap-3 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-200 hover:text-black'
+				)}
 			>
 				<PaymentIcon class="h-5 w-5" />
 				<span>Billing</span>
 			</a>
 			<a
 				href={`/${$page.params.organization}/team`}
-				class="flex w-full items-center gap-2 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-300 hover:text-black"
+				class={cn(
+					$page.url.pathname === `/${$page.params.organization}/team` && 'bg-sky-100 text-sky-700',
+					'flex w-full items-center gap-3 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-200 hover:text-black'
+				)}
 			>
 				<PeopleIcon class="h-5 w-5" />
 				<span>Team</span>

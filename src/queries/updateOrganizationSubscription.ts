@@ -1,10 +1,11 @@
+import { Resource } from 'sst';
 import { dbClient } from '$lib/auth';
 import { UpdateItemCommand } from '@aws-sdk/client-dynamodb';
-import { Resource } from 'sst';
 
-export default async function createOrganizationPayment(
+export async function updateOrganizationSubscription(
 	organization: string,
-	stripeCustomerId: string
+	subscriptionId: string,
+	subscriptionStatus: string
 ) {
 	const params = {
 		TableName: Resource.OpenGraphPicsDB.name,
@@ -13,10 +14,10 @@ export default async function createOrganizationPayment(
 			sk: { S: `METADATA` }
 		},
 		UpdateExpression:
-			'SET subscriptionStatus = :subscriptionStatus, stripeCustomerId = :stripeCustomerId',
+			'SET subscriptionStatus = :subscriptionStatus, stripeSubscriptionId = :stripeSubscriptionId',
 		ExpressionAttributeValues: {
-			':subscriptionStatus': { S: 'draft' },
-			':stripeCustomerId': { S: stripeCustomerId }
+			':subscriptionStatus': { S: subscriptionStatus },
+			':stripeSubscriptionId': { S: subscriptionId }
 		}
 	};
 
