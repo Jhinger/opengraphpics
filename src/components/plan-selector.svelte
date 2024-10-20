@@ -41,6 +41,7 @@
 				'Up to 100 routes',
 				'1 Member',
 				'Global fallback thumbnail',
+				'Image Optimization',
 				'Basic analytics'
 			]}
 			priceId={isYearly ? ENTRY_YEARLY_PRICE_ID : ENTRY_MONTHLY_PRICE_ID}

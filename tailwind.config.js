@@ -1,5 +1,5 @@
-/** @type {import('tailwindcss').Config} */
 const config = {
+	plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 	darkMode: ['class'],
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	safelist: ['dark'],
@@ -49,6 +49,7 @@ const config = {
 			},
 			fontSize: {
 				xxs: '0.7rem',
+				xsplus: '0.8rem',
 				smplus: '0.925rem'
 			},
 			borderRadius: {

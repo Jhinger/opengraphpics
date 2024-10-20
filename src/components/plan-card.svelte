@@ -3,7 +3,7 @@
 	import { Button } from '$components/ui/button';
 	import CheckIcon from 'virtual:icons/mdi/check';
 	import { getContext } from 'svelte';
-	import type { User, OrganizationPageData } from '$types';
+	import type { OrganizationPageData } from '$types';
 
 	let { planName, planPrice, planFeatures, priceId, isPopular } = $props<{
 		planName: string;
@@ -14,7 +14,6 @@
 	}>();
 
 	const organization = getContext<OrganizationPageData>('organization');
-	const user = getContext<User>('user');
 	console.log(organization);
 </script>
 
@@ -39,7 +38,6 @@
 			name="orgStripeId"
 			value={organization.organizationMetadata.stripeCustomerId}
 		/>
-		<input type="hidden" name="orgEmail" value={user.email} />
 		<input type="hidden" name="priceId" value={priceId} />
 		<Button type="submit" class="w-full transition-all duration-150 hover:bg-sky-500"
 			>Select Plan</Button

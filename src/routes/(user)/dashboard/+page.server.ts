@@ -1,4 +1,5 @@
 import createOrganization from '$queries/createOrganization';
+import sharp from 'sharp';
 import { uploadImages } from '$lib/s3';
 import { redirect, fail } from '@sveltejs/kit';
 import { stripe } from '$lib/stripe';
@@ -38,14 +39,21 @@ export const actions: Actions = {
 		});
 		await createOrganizationPayment(org, stripeCustomer.id);
 
+		const convertedIcon = await sharp(await icon.arrayBuffer())
+			.webp({ quality: 60 })
+			.toBuffer();
+		const convertedThumbnail = await sharp(await thumbnail.arrayBuffer())
+			.webp({ quality: 80 })
+			.toBuffer();
+
 		const uploadResponse = uploadImages([
 			{
 				key: `${org}/icon`,
-				file: icon
+				file: convertedIcon
 			},
 			{
 				key: `${org}/thumbnail`,
-				file: thumbnail
+				file: convertedThumbnail
 			}
 		]);
 

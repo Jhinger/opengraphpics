@@ -9,9 +9,11 @@ export default async function getOrganizationMetadata(organization: string) {
 		sk: { S: 'METADATA' }
 	};
 
+	// TODO: Update this to ConsistentRead true, probably update GetUsers as well.
 	const params = {
 		TableName: Resource.OpenGraphPicsDB.name,
-		Key: key
+		Key: key,
+		ConsistentRead: false
 	};
 
 	try {

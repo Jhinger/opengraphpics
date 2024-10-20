@@ -8,12 +8,9 @@ export const actions: Actions = {
 
 		const form = await request.formData();
 		const priceId = form.get('priceId')?.toString();
-		const orgEmail = form.get('orgEmail')?.toString();
 		const orgStripeId = form.get('orgStripeId')?.toString();
 
-		console.log(priceId, orgEmail, orgStripeId);
-
-		if (!priceId || !orgEmail || !orgStripeId) {
+		if (!priceId || !orgStripeId) {
 			fail(400, { success: false, message: 'Failed to provide necessary data.' });
 		}
 

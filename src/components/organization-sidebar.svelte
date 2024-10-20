@@ -4,6 +4,8 @@
 	import ImageIcon from 'virtual:icons/mdi/image-outline';
 	import PaymentIcon from 'virtual:icons/mdi/payment';
 	import PeopleIcon from 'virtual:icons/mdi/people-outline';
+	import NotoRat from 'virtual:icons/noto-v1/rat';
+	import GearIcon from 'virtual:icons/mdi/gear-outline';
 	import { getContext } from 'svelte';
 	import type { User } from '$types';
 	import { initials } from '$lib/utils';
@@ -16,9 +18,9 @@
 <nav class="flex h-screen w-[15rem] flex-col items-center justify-between bg-gray-100 py-6">
 	<a
 		href="/dashboard"
-		class="mb-6 flex w-full flex-row items-center justify-center gap-2 font-bold"
+		class="mb-6 flex w-full flex-row items-center justify-center gap-1 font-bold"
 	>
-		<div class="aspect-square w-6 rounded-sm bg-sky-300"></div>
+		<NotoRat class="h-7 w-7" />
 		<span>OpenGraph.pics</span>
 	</a>
 	<div class="my-4 flex w-full flex-grow flex-col items-start">
@@ -65,6 +67,17 @@
 			>
 				<PeopleIcon class="h-5 w-5" />
 				<span>Team</span>
+			</a>
+			<a
+				href={`/${$page.params.organization}/settings`}
+				class={cn(
+					$page.url.pathname === `/${$page.params.organization}/settings` &&
+						'bg-sky-100 text-sky-700',
+					'flex w-full items-center gap-3 rounded-md px-6 py-2 duration-75 hover:cursor-pointer hover:bg-gray-200 hover:text-black'
+				)}
+			>
+				<GearIcon class="h-5 w-5" />
+				<span>Settings</span>
 			</a>
 		</div>
 	</div>
