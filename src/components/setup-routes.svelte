@@ -8,7 +8,7 @@
 	import { enhance } from '$app/forms';
 	import type { OrganizationPageData } from '$types';
 
-	const organization = getContext('organization');
+	const organization = getContext<OrganizationPageData>('organization');
 
 	let sitemapUrl = $state('');
 	let sitemapContent = $state('');
@@ -16,8 +16,9 @@
 </script>
 
 <form
-	class="h-fit w-[40rem] rounded-md bg-gray-200 p-8 text-sm"
+	class="h-fit w-[40rem] rounded-md bg-sky-100 p-8 text-sm"
 	method="post"
+	action="?/setupRoutes"
 	use:enhance={({ cancel }) => {
 		if (!sitemapUrl && !sitemapContent) {
 			unfilledError = true;
@@ -29,10 +30,17 @@
 		};
 	}}
 >
+	<input
+		type="text"
+		name="organization"
+		class="hidden"
+		value={organization.organizationMetadata.organization}
+	/>
 	<div class="mb-8 flex flex-col items-start justify-center gap-4 text-gray-700">
+		<h1 class="w-full text-left text-2xl font-bold text-black">Getting Started</h1>
 		<p>
-			To get started, please provide a list of URLs you want to support. Please choose one of the
-			following options to get started. Don't worry - you can add or remove routes at any time.
+			Provide a list of URLs you'd like to support by selecting one of the options below. Don't
+			worry - you can easily add or remove routes anytime.
 		</p>
 		<p>
 			<span class="font-semibold text-black">Note</span>: If your plan only allows for 100 routes
@@ -51,8 +59,8 @@
 			<Input
 				type="url"
 				id="sitemap-url"
-				bind:value={sitemapUrl}
 				name="sitemap-url"
+				bind:value={sitemapUrl}
 				placeholder="https://www.opengraph.pics/sitemap.xml"
 			/>
 		</div>

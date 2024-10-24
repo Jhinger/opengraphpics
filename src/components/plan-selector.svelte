@@ -53,6 +53,7 @@
 				'Up to 1000 routes',
 				'5 Members',
 				'Route-specific fallback thumbnail',
+				'Image Optimization',
 				'On-Demand generation',
 				'Monthly route refreshes',
 				'Basic Analytics'
@@ -66,6 +67,7 @@
 				'Unlimited routes',
 				'10 Members',
 				'Custom thumbnails',
+				'Image Optimization',
 				'Instant route refreshes',
 				'* Multi-Site support'
 			]}

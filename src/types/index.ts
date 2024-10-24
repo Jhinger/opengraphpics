@@ -50,6 +50,8 @@ export type OrganizationInvitation = {
 
 export type OrganizationRoute = {
 	route: string;
+	createdAt: string;
+	updatedAt: string;
 };
 
 export type OrganizationViews = {
