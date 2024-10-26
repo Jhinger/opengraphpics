@@ -34,6 +34,7 @@ export default async function batchGetOrganizationMetadata(
 			return {
 				...lookup[metadata!.pk!.S!.split('#')[1]],
 				numMembers: metadata.numMembers!.N!,
+				subscription: metadata.subscription!.S!,
 				subscriptionStatus: metadata.subscriptionStatus?.S ?? 'draft',
 				stripeSubscriptionId: metadata?.subscriptionId?.S ?? ''
 			};

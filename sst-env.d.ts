@@ -33,6 +33,10 @@ declare module "sst" {
       "type": "sst.aws.Router"
       "url": string
     }
+    "OpenGraphPicsQueue": {
+      "type": "sst.aws.Queue"
+      "url": string
+    }
     "StripeSecret": {
       "type": "sst.sst.Secret"
       "value": string

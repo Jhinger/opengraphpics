@@ -1,7 +1,9 @@
 import { stripe } from '$lib/stripe';
 import { redirect, fail } from '@sveltejs/kit';
-import { invalidate } from '$app/navigation';
+import { invalidateAll } from '$app/navigation';
 import batchCreateRoutes from '$queries/batchCreateRoutes';
+import { userPlan } from '$lib/utils';
+import { Queue } from '$lib/sqs';
 import Sitemapper from 'sitemapper';
 import type { SitemapperResponse } from 'sitemapper';
 import type { Actions } from './$types';
@@ -18,9 +20,17 @@ export const actions: Actions = {
 			fail(400, { success: false, message: 'Failed to provide necessary data.' });
 		}
 
+		const userIntendedPlan = userPlan(priceId as string);
+		if (userIntendedPlan === 'ERROR') {
+			fail(400, { success: false, message: 'This Price Id does not exist.' });
+		}
+
 		const session = await stripe.checkout.sessions.create({
 			mode: 'subscription',
 			customer: orgStripeId,
+			metadata: {
+				plan: userPlan(priceId as string)
+			},
 			line_items: [
 				{
 					price: priceId,
@@ -61,14 +71,22 @@ export const actions: Actions = {
 
 			try {
 				const sites: SitemapperResponse = await sitemapper.fetch();
+				const queue = new Queue();
 				console.log('sites: ', sites);
 
 				for (let i = 0; i < sites.sites.length; i += 25) {
 					const batch = sites.sites.slice(i, i + 25);
 					await batchCreateRoutes(organization, batch);
+
+					for (const site of batch) {
+						queue.sendMessage({
+							url: site,
+							organization: organization
+						});
+					}
 				}
 
-				invalidate(url);
+				await invalidateAll();
 			} catch (error) {
 				fail(400, { success: false, message: 'Failed to fetch sitemap' });
 			}

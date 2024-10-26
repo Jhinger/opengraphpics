@@ -37,6 +37,7 @@ export type UserOrganization = {
 
 export type OrganizationMetadata = UserOrganization & {
 	numMembers: string;
+	subscription: string;
 	subscriptionStatus: string;
 	stripeSubscriptionId: string;
 	stripeCustomerId?: string;

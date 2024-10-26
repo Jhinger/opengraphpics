@@ -32,8 +32,9 @@ export async function POST({ request }: RequestEvent) {
 			data = data as Stripe.CheckoutSessionCompletedEvent.Data;
 			const orgName = data.object.customer_details!.name!;
 			const orgSubscriptionId = data.object.subscription as string;
+			const orgPlan = data.object.metadata!.plan;
 
-			await updateOrganizationSubscription(orgName, orgSubscriptionId, 'paid');
+			await updateOrganizationSubscription(orgName, orgSubscriptionId, 'paid', orgPlan);
 			break;
 		}
 		case 'invoice.paid': {

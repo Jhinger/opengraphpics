@@ -43,6 +43,23 @@ export default $config({
 			primaryIndex: { hashKey: 'pk', rangeKey: 'sk' }
 		});
 
+		const queue = new sst.aws.Queue('OpenGraphPicsQueue', {
+			fifo: false
+		});
+		queue.subscribe(
+			{
+				name: 'OpenGraphPicsQueueSubscriber',
+				handler: 'functions/queue/subscriber.handler',
+				link: [bucket]
+				// TODO: Add puppeteer.
+			},
+			{
+				batch: {
+					size: 1
+				}
+			}
+		);
+
 		const app = new sst.aws.SvelteKit('OpenGraphPicsApp', {
 			link: [
 				db,
@@ -51,7 +68,8 @@ export default $config({
 				googleClientSecret,
 				jwtSecret,
 				stripeSecret,
-				stripeWebhookSecret
+				stripeWebhookSecret,
+				queue
 			]
 		});
 
@@ -65,6 +83,13 @@ export default $config({
 						to: '/$1'
 					}
 				}
+			}
+		});
+
+		new sst.x.DevCommand('Stripe', {
+			dev: {
+				command: 'npm run stripe-local',
+				autostart: true
 			}
 		});
 

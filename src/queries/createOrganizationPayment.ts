@@ -13,10 +13,11 @@ export default async function createOrganizationPayment(
 			sk: { S: `METADATA` }
 		},
 		UpdateExpression:
-			'SET subscriptionStatus = :subscriptionStatus, stripeCustomerId = :stripeCustomerId',
+			'SET subscriptionStatus = :subscriptionStatus, stripeCustomerId = :stripeCustomerId, subscription = :subscription',
 		ExpressionAttributeValues: {
 			':subscriptionStatus': { S: 'draft' },
-			':stripeCustomerId': { S: stripeCustomerId }
+			':stripeCustomerId': { S: stripeCustomerId },
+			':subscription': { S: 'NO PLAN' }
 		}
 	};
 

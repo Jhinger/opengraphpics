@@ -4,6 +4,8 @@
 	import RefreshIcon from 'virtual:icons/mdi/refresh';
 	import EyeIcon from 'virtual:icons/mdi/eye-outline';
 	import InviteIcon from 'virtual:icons/mdi/invite';
+	import MapIcon from 'virtual:icons/mdi/map-marker-path';
+	import AccountView from 'virtual:icons/mdi/account-view';
 	import AnalyticCard from '$components/analytic-card.svelte';
 	import AnalyticChart from '$components/analytic-chart.svelte';
 	import OrganizationRecentImage from '$components/organization-recent-image.svelte';
@@ -30,10 +32,30 @@
 				<span>Dashboard</span>
 			</div>
 			<div class="flex w-max flex-row items-center justify-center gap-6">
-				<AnalyticCard />
-				<AnalyticCard />
-				<AnalyticCard />
-				<AnalyticCard />
+				<AnalyticCard
+					title="Routes Supported"
+					Icon={MapIcon}
+					value={organization.organizationRoutes.length}
+					subvalue="/500 route plan"
+				/>
+				<AnalyticCard
+					title="Thumbnail Views"
+					Icon={AccountView}
+					value={(12309).toLocaleString()}
+					subvalue="+24% MoM"
+				/>
+				<AnalyticCard
+					title="Routes Supported"
+					Icon={MapIcon}
+					value="203"
+					subvalue="/500 route plan"
+				/>
+				<AnalyticCard
+					title="Routes Supported"
+					Icon={MapIcon}
+					value="203"
+					subvalue="/500 route plan"
+				/>
 			</div>
 			<div class="my-4 flex h-fit flex-row items-stretch justify-center gap-4 rounded-md">
 				<div class="flex flex-col items-start justify-center rounded-md bg-gray-200">

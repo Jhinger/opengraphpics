@@ -24,6 +24,7 @@ export default async function getOrganizationMetadata(organization: string) {
 		return {
 			organization: organization,
 			numMembers: metadata.numMembers?.N,
+			subscription: metadata.subscription?.S,
 			stripeCustomerId: metadata.stripeCustomerId?.S,
 			stripeSubscriptionId: metadata?.stripeSubscriptionId?.S ?? '',
 			subscriptionStatus: metadata.subscriptionStatus?.S,

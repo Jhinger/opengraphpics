@@ -1,6 +1,14 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { cubicOut } from 'svelte/easing';
+import {
+	ENTRY_MONTHLY_PRICE_ID,
+	ENTRY_YEARLY_PRICE_ID,
+	GROWTH_MONTHLY_PRICE_ID,
+	GROWTH_YEARLY_PRICE_ID,
+	ENTERPRISE_MONTHLY_PRICE_ID,
+	ENTERPRISE_YEARLY_PRICE_ID
+} from '$constants';
 import type { TransitionConfig } from 'svelte/transition';
 
 export function cn(...inputs: ClassValue[]) {
@@ -12,6 +20,28 @@ export function initials(name: string) {
 		.split(' ')
 		.map((word) => word[0])
 		.join('');
+}
+
+export function userPlan(plan: string) {
+	switch (plan) {
+		case ENTRY_YEARLY_PRICE_ID:
+		case ENTRY_MONTHLY_PRICE_ID: {
+			return 'Entry';
+		}
+
+		case GROWTH_YEARLY_PRICE_ID:
+		case GROWTH_MONTHLY_PRICE_ID: {
+			return 'Growth';
+		}
+
+		case ENTERPRISE_YEARLY_PRICE_ID:
+		case ENTERPRISE_MONTHLY_PRICE_ID: {
+			return 'Enterprise';
+		}
+
+		default:
+			return 'ERROR';
+	}
 }
 
 export function assetPath(path: string) {
