@@ -15,23 +15,21 @@
 			toast.error('Failed to create organization.', { description: form?.message });
 		} else if (form?.missing) {
 			toast.error('Failed to create organization', { description: form?.message });
-		} else if (form?.uploadFailed) {
-			toast.error('Failed tot create organization', { description: form?.message });
 		} else if (form?.unprocessedItems) {
 			toast.error('Failed to create organization', { description: form?.message });
 		}
 	});
 </script>
 
-<div class="flex justify-center items-center">
-	<div class="flex flex-col justify-center items-center w-[55rem] mt-16 mb-32">
-		<div class="flex justify-between items-end w-full py-2">
-			<h1 class="text-lg font-semibold px-4">Organizations</h1>
+<div class="flex items-center justify-center">
+	<div class="mb-32 mt-16 flex w-[55rem] flex-col items-center justify-center">
+		<div class="flex w-full items-end justify-between py-2">
+			<h1 class="px-4 text-lg font-semibold">Organizations</h1>
 			<CreateOrganizationModal />
 		</div>
 		<Separator orientation="horizontal" class="h-[0.1rem]" />
 		<div
-			class="flex flex-row gap-4 justify-start items-center w-full h-[13rem] mt-5 bg-gray-200 rounded-md p-4"
+			class="mt-5 flex h-[13rem] w-full flex-row items-center justify-start gap-4 rounded-md bg-gray-200 p-4"
 		>
 			{#each data?.organizationsMetadata as organization}
 				<OrganizationCard {organization} />
@@ -40,14 +38,14 @@
 			{/each}
 		</div>
 		<div class="w-full py-2">
-			<h1 class="text-lg font-semibold px-4 mt-4">Invitations</h1>
+			<h1 class="mt-4 px-4 text-lg font-semibold">Invitations</h1>
 		</div>
 		<Separator orientation="horizontal" class="h-[0.1rem]" />
 		<div
-			class="flex flex-col justify-center items-center w-full h-[13rem] mt-5 bg-gray-200 rounded-md gap-2"
+			class="mt-5 flex h-[13rem] w-full flex-col items-center justify-center gap-2 rounded-md bg-gray-200"
 		>
-			<NotoRat class="w-16 h-16" />
-			<span class="font-semibold text-black/30 text-sm">No pending invitations.</span>
+			<NotoRat class="h-16 w-16" />
+			<span class="text-sm font-semibold text-black/30">No pending invitations.</span>
 		</div>
 	</div>
 </div>

@@ -10,6 +10,7 @@
 	import AnalyticChart from '$components/analytic-chart.svelte';
 	import OrganizationRecentImage from '$components/organization-recent-image.svelte';
 	import SetupRoutes from '$components/setup-routes.svelte';
+	import Ping from '$components/ping.svelte';
 	import { Button } from '$components/ui/button/';
 	import { getContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
@@ -84,7 +85,15 @@
 			</div>
 			<div class="my-4 flex h-fit flex-row items-stretch justify-center gap-4 rounded-md">
 				<div class="flex flex-col items-start justify-center rounded-md bg-gray-200">
-					<div class="px-5 py-4 text-lg font-semibold tracking-tight">Recent Images</div>
+					<div class="flex w-full items-center justify-between px-5 py-4">
+						<div class="text-lg font-semibold tracking-tight">Recent Images</div>
+						<div class="flex items-center justify-center gap-1">
+							<Ping />
+							<span class="text-xsplus font-medium">Generating</span>
+						</div>
+					</div>
+					<!-- TODO: UI that showcases something else while images are being generated. -->
+					<!-- TODO: sort by most recently updated and then filter. -->
 					<div class="grid w-max grid-cols-3 grid-rows-2 gap-4 px-4 pb-4">
 						{#each validOrganizationRoutes() as route}
 							<OrganizationRecentImage>

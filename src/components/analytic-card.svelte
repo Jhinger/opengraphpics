@@ -12,7 +12,7 @@
 >
 	<div class="flex w-full justify-between text-black">
 		<span class="text-sm font-medium">{title}</span>
-		<Icon class="h-4 w-4" />
+		<Icon class="h-5 w-5 text-gray-500" />
 	</div>
 	<div class="flex w-full flex-col items-start justify-center">
 		<span class="text-3xl font-bold">

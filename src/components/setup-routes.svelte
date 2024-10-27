@@ -102,14 +102,15 @@
 	</div>
 	<!-- TODO: Add ability to manually specify routes. -->
 	<div class="">
-		{#if isCreating}
-			<LoadingSpinner />
-		{:else}
-			<Button
-				type="submit"
-				class="w-full bg-sky-500 transition-all duration-150 hover:bg-sky-600 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:ring-offset-gray-200"
-				>Submit</Button
-			>
-		{/if}
+		<Button
+			type="submit"
+			class="w-full bg-sky-500 transition-all duration-150 hover:bg-sky-600 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:ring-offset-gray-200"
+		>
+			{#if isCreating}
+				<LoadingSpinner />
+			{:else}
+				Submit
+			{/if}
+		</Button>
 	</div>
 </form>

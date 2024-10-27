@@ -46,7 +46,7 @@ export const actions: Actions = {
 			.webp({ quality: 80 })
 			.toBuffer();
 
-		const uploadResponse = uploadImages([
+		uploadImages([
 			{
 				key: `${org}/icon`,
 				file: convertedIcon
@@ -56,12 +56,6 @@ export const actions: Actions = {
 				file: convertedThumbnail
 			}
 		]);
-
-		if (!uploadResponse.success)
-			return fail(400, {
-				uploadFailed: true,
-				message: 'Failed to upload some or all assets - Organization is created without assets.'
-			});
 
 		//TODO: Invalidate the /dashboard route if redirecting back to the dashboard.
 		return redirect(303, `/${org}`);

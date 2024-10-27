@@ -39,7 +39,7 @@ export async function handler(event: SQSEvent) {
 		await page.goto(message.url);
 
 		const screenshot = await page.screenshot({ type: 'webp', encoding: 'binary', quality: 100 });
-		await uploadImages([
+		uploadImages([
 			{
 				key: `${message.organization}${pathname}`,
 				file: screenshot
