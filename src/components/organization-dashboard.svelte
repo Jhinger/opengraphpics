@@ -12,11 +12,36 @@
 	import SetupRoutes from '$components/setup-routes.svelte';
 	import { Button } from '$components/ui/button/';
 	import { getContext } from 'svelte';
+	import { toast } from 'svelte-sonner';
+	import { assetPath } from '$lib/utils';
+	import { MAX_ROUTES_TO_DISPLAY } from '$constants';
 	import type { OrganizationMetadata, OrganizationPageData } from '$types';
 
 	const { organizationMetadata } = $props<{ organizationMetadata: OrganizationMetadata[] }>();
 
 	const organization = getContext<OrganizationPageData>('organization');
+
+	$effect(() => {
+		if (organization.organizationMetadata.subscriptionStatus === 'past_due') {
+			toast.warning(
+				'Your subscription is past due. Please alert an admin user to update the subscription.'
+			);
+		}
+	});
+
+	function validOrganizationRoutes() {
+		let valid = [];
+		let counter = 0;
+
+		for (let i = 0; i < organization.organizationRoutes.length; i++) {
+			if (!organization.organizationRoutes[i].route.includes('.')) {
+				valid.push(organization.organizationRoutes[i]);
+				counter += 1;
+			}
+			if (counter === MAX_ROUTES_TO_DISPLAY) break;
+		}
+		return valid;
+	}
 </script>
 
 <main class="flex w-full items-center justify-center">
@@ -61,24 +86,17 @@
 				<div class="flex flex-col items-start justify-center rounded-md bg-gray-200">
 					<div class="px-5 py-4 text-lg font-semibold tracking-tight">Recent Images</div>
 					<div class="grid w-max grid-cols-3 grid-rows-2 gap-4 px-4 pb-4">
-						<OrganizationRecentImage>
-							<img src="https://picsum.photos/200/300" alt="" class="h-full w-full object-cover" />
-						</OrganizationRecentImage>
-						<OrganizationRecentImage>
-							<img src="https://picsum.photos/200/300" alt="" class="h-full w-full object-cover" />
-						</OrganizationRecentImage>
-						<OrganizationRecentImage>
-							<img src="https://picsum.photos/200/300" alt="" class="h-full w-full object-cover" />
-						</OrganizationRecentImage>
-						<OrganizationRecentImage>
-							<img src="https://picsum.photos/200/300" alt="" class="h-full w-full object-cover" />
-						</OrganizationRecentImage>
-						<OrganizationRecentImage>
-							<img src="https://picsum.photos/200/300" alt="" class="h-full w-full object-cover" />
-						</OrganizationRecentImage>
-						<OrganizationRecentImage>
-							<img src="https://picsum.photos/200/300" alt="" class="h-full w-full object-cover" />
-						</OrganizationRecentImage>
+						{#each validOrganizationRoutes() as route}
+							<OrganizationRecentImage>
+								<img
+									src={assetPath(
+										`/assets/${organization.organizationMetadata.organization}${route.route === '/' ? '/index' : route.route}`
+									)}
+									alt="Template"
+									class="flex h-full w-full items-center justify-center object-cover"
+								/>
+							</OrganizationRecentImage>
+						{/each}
 					</div>
 				</div>
 				<div

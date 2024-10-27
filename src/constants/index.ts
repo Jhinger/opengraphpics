@@ -15,3 +15,5 @@ export const GROWTH_YEARLY_PRICE_ID = 'price_1Q9JMdFrEOPXxwu9dhmKtAlZ';
 
 export const ENTERPRISE_MONTHLY_PRICE_ID = 'price_1Q0v6SFrEOPXxwu9Z91fx1jI';
 export const ENTERPRISE_YEARLY_PRICE_ID = 'price_1Q9JN1FrEOPXxwu9g27J7xkC';
+
+export const MAX_ROUTES_TO_DISPLAY = 6;

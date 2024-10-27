@@ -4,6 +4,7 @@
 	import { Textarea } from '$components/ui/textarea';
 	import { Separator } from '$components/ui/separator';
 	import { Button } from '$components/ui/button';
+	import LoadingSpinner from '$components/loading-spinner.svelte';
 	import { getContext } from 'svelte';
 	import { enhance } from '$app/forms';
 	import type { OrganizationPageData } from '$types';
@@ -13,6 +14,8 @@
 	let sitemapUrl = $state('');
 	let sitemapContent = $state('');
 	let unfilledError = $state(false);
+
+	let isCreating = $state(false);
 </script>
 
 <form
@@ -20,12 +23,14 @@
 	method="post"
 	action="?/setupRoutes"
 	use:enhance={({ cancel }) => {
+		isCreating = true;
 		if (!sitemapUrl && !sitemapContent) {
 			unfilledError = true;
 			return cancel();
 		}
 		unfilledError = false;
 		return async ({ update }) => {
+			isCreating = false;
 			await update();
 		};
 	}}
@@ -97,10 +102,14 @@
 	</div>
 	<!-- TODO: Add ability to manually specify routes. -->
 	<div class="">
-		<Button
-			type="submit"
-			class="w-full bg-sky-500 transition-all duration-150 hover:bg-sky-600 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:ring-offset-gray-200"
-			>Submit</Button
-		>
+		{#if isCreating}
+			<LoadingSpinner />
+		{:else}
+			<Button
+				type="submit"
+				class="w-full bg-sky-500 transition-all duration-150 hover:bg-sky-600 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:ring-offset-gray-200"
+				>Submit</Button
+			>
+		{/if}
 	</div>
 </form>

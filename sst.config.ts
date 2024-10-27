@@ -49,9 +49,13 @@ export default $config({
 		queue.subscribe(
 			{
 				name: 'OpenGraphPicsQueueSubscriber',
-				handler: 'functions/queue/subscriber.handler',
-				link: [bucket]
-				// TODO: Add puppeteer.
+				handler: 'src/functions/queue/subscriber.handler',
+				link: [bucket],
+				nodejs: {
+					install: ['@sparticuz/chromium']
+				},
+				memory: '2 GB',
+				timeout: '5 minutes'
 			},
 			{
 				batch: {

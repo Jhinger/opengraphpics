@@ -5,29 +5,31 @@ export const s3Client = new S3Client({ region: 'us-east-2' });
 
 export type ImageToUpload = {
 	key: string;
-	file: File | Buffer;
+	file: File | Buffer | Uint8Array;
 };
 
-export function uploadImages(images: ImageToUpload[]) {
+export async function uploadImages(images: ImageToUpload[]) {
 	if (images.length === 0) return { success: false };
 
-	images.forEach(async (image) => {
-		const bytes = image.file instanceof File ? await image.file.arrayBuffer() : image.file;
-		const buffer = Buffer.from(bytes);
+	await Promise.all(
+		images.map(async (image) => {
+			const buffer =
+				image.file instanceof Buffer
+					? image.file
+					: image.file instanceof File
+						? Buffer.from(await image.file.arrayBuffer())
+						: Buffer.from(image.file);
 
-		const command = new PutObjectCommand({
-			Bucket: Resource.OpenGraphPicsBucket.name,
-			Key: image.key,
-			Body: buffer,
-			ContentType: image.file instanceof File ? image.file.type : 'image/webp'
-		});
+			const command = new PutObjectCommand({
+				Bucket: Resource.OpenGraphPicsBucket.name,
+				Key: image.key,
+				Body: buffer,
+				ContentType: image.file instanceof File ? image.file.type : 'image/webp'
+			});
 
-		try {
 			await s3Client.send(command);
-		} catch (error) {
-			return { success: false };
-		}
-	});
+		})
+	);
 
 	return { success: true };
 }
