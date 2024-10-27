@@ -30,6 +30,23 @@
 		}
 	});
 
+	function maxRoutesAllowed() {
+		switch (organization.organizationMetadata.subscription) {
+			case 'NO PLAN': {
+				return 10;
+			}
+			case 'ENTRY': {
+				return 100;
+			}
+			case 'Growth': {
+				return 500;
+			}
+			case 'Enterprise': {
+				return Infinity;
+			}
+		}
+	}
+
 	function validOrganizationRoutes() {
 		let valid = [];
 		let counter = 0;
@@ -62,7 +79,7 @@
 					title="Routes Supported"
 					Icon={MapIcon}
 					value={organization.organizationRoutes.length}
-					subvalue="/500 route plan"
+					subvalue={`/${maxRoutesAllowed()} route plan`}
 				/>
 				<AnalyticCard
 					title="Thumbnail Views"

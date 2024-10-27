@@ -43,6 +43,7 @@ export default $config({
 			primaryIndex: { hashKey: 'pk', rangeKey: 'sk' }
 		});
 
+		// TODO: Revisit the timeout amount for production.
 		const queue = new sst.aws.Queue('OpenGraphPicsQueue', {
 			fifo: false
 		});
