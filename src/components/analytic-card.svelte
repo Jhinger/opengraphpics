@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="flex h-[8rem] w-[15rem] flex-col items-center justify-between rounded-md bg-gray-200 p-4"
+	class="flex h-[8rem] w-[15rem] flex-col items-center justify-between rounded-md bg-gray-200 p-4 duration-100 hover:text-sky-500"
 >
 	<div class="flex w-full justify-between text-black">
 		<span class="text-sm font-medium">{title}</span>

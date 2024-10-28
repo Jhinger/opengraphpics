@@ -42,7 +42,7 @@
 				return 500;
 			}
 			case 'Enterprise': {
-				return Infinity;
+				return 'Infinity';
 			}
 		}
 	}
