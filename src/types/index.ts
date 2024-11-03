@@ -53,6 +53,7 @@ export type OrganizationRoute = {
 	route: string;
 	createdAt: string;
 	updatedAt: string;
+	queued: boolean;
 };
 
 export type OrganizationViews = {

@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
 import { uploadImages } from '$lib/s3';
+import updateOrganizationRoute from '$queries/updateOrganizationRoute';
 import type { SQSEvent } from 'aws-lambda';
 
 type QueueMessage = {
@@ -8,9 +9,11 @@ type QueueMessage = {
 	organization: string;
 };
 
-function path(url: string) {
+function path(url: string, isS3: boolean = true): string {
 	const urlObj = new URL(url);
-	return urlObj.pathname === '/' ? '/index' : urlObj.pathname;
+	const path = urlObj.pathname;
+
+	return isS3 && path === '/' ? '/index' : path;
 }
 
 const LOCAL_CHROMIUM =
@@ -20,10 +23,10 @@ export async function handler(event: SQSEvent) {
 	console.log('event:', event);
 
 	let browser;
-	try {
-		const message = JSON.parse(event.Records[0].body) as QueueMessage;
-		const pathname = path(message.url);
+	const message = JSON.parse(event.Records[0].body) as QueueMessage;
+	const pathname = path(message.url);
 
+	try {
 		browser = await puppeteer.launch({
 			args: chromium.args,
 			defaultViewport: chromium.defaultViewport,
@@ -65,6 +68,7 @@ export async function handler(event: SQSEvent) {
 	} finally {
 		if (browser) {
 			console.log('Closing browser');
+			await updateOrganizationRoute(message.organization, path(message.url, false), false);
 			await browser.close();
 		}
 	}

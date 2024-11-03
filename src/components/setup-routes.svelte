@@ -60,6 +60,7 @@
 	</div>
 	<div class="h-full w-full">
 		<div class="flex w-full flex-col items-start justify-center gap-2">
+			<!-- TODO: Explain what a sitemap file is. -->
 			<Label for="sitemap-url">Sitemap URL:</Label>
 			<Input
 				type="url"

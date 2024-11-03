@@ -27,7 +27,10 @@ export default async function getOrganizationRoutes(
 		const items = response.Items;
 		const organizationRoutes = items!.map((route) => {
 			return {
-				route: route!.sk!.S!.split('#')[1]
+				route: route!.sk!.S!.split('#')[1],
+				createdAt: route!.createdAt!.S!,
+				updatedAt: route!.updatedAt!.S!,
+				queued: route!.queued!.BOOL!
 			};
 		});
 

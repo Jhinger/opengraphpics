@@ -14,7 +14,8 @@ export default async function batchCreateRoutes(organization: string, routes: st
 								pk: { S: `ORG#${organization}` },
 								sk: { S: `ROUTE#${path}` },
 								createdAt: { S: new Date().toISOString() },
-								updatedAt: { S: new Date().toISOString() }
+								updatedAt: { S: new Date().toISOString() },
+								queued: { BOOL: true }
 							}
 						}
 					};

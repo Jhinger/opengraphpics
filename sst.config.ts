@@ -51,7 +51,7 @@ export default $config({
 			{
 				name: 'OpenGraphPicsQueueSubscriber',
 				handler: 'src/functions/queue/subscriber.handler',
-				link: [bucket],
+				link: [bucket, db],
 				nodejs: {
 					install: ['@sparticuz/chromium']
 				},

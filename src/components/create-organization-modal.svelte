@@ -94,15 +94,15 @@
 
 <Dialog.Root>
 	<Dialog.Trigger class={buttonVariants({ variant: 'outline' })}>
-		<CreateNewFolderIcon class="w-6 h-6" />
+		<CreateNewFolderIcon class="h-6 w-6" />
 		<span class="ml-2">Create</span>
 	</Dialog.Trigger>
-	<Dialog.Content>
+	<Dialog.Content class="w-[32rem]">
 		<Dialog.Header>
 			<Dialog.Title>Create an Organization</Dialog.Title>
 		</Dialog.Header>
 		<form
-			class="pt-3 flex flex-col gap-4"
+			class="flex flex-col gap-4 pt-3"
 			method="post"
 			action="/dashboard?/create"
 			enctype="multipart/form-data"
@@ -116,7 +116,7 @@
 		>
 			<div class="flex flex-col justify-start gap-2">
 				<!-- //TODO: Verify if the organization name is available -->
-				<Label for="name" class="font-semibold text-sm">Name</Label>
+				<Label for="name" class="text-sm font-semibold">Name</Label>
 				<Input
 					bind:value={organizationName}
 					on:input={formatOrganizationName}
@@ -129,7 +129,7 @@
 				/>
 			</div>
 			<div class="flex flex-col justify-start gap-2">
-				<Label for="domain" class="font-semibold text-sm">Domain</Label>
+				<Label for="domain" class="text-sm font-semibold">Domain</Label>
 				<Input
 					bind:value={organizationDomain}
 					oninput={formatDomainName}
@@ -142,8 +142,8 @@
 				/>
 			</div>
 			<div class="flex flex-col justify-start gap-2">
-				<Label for="icon" class="font-semibold text-sm"
-					>Icon <span class="font-normal italic text-xs"
+				<Label for="icon" class="text-sm font-semibold"
+					>Icon <span class="text-xs font-normal italic"
 						>({MAX_FILE_ICON_SIZE / BYTES_IN_MB}MB max)</span
 					></Label
 				>
@@ -154,7 +154,7 @@
 					placeholder="Organization Icon"
 					onchange={handleIconUpload}
 					accept="image/jpg,image/png,image/jpeg,image/avif"
-					class="file:bg-sky-100 file:mr-4 file:rounded-md file:hover:cursor-pointer hover:cursor-pointer"
+					class="file:mr-4 file:rounded-md file:bg-sky-100 hover:cursor-pointer file:hover:cursor-pointer"
 					required
 				/>
 				{#if !isIconValidSize}
@@ -164,9 +164,9 @@
 				{/if}
 			</div>
 			<div class="flex flex-col justify-start gap-2">
-				<Label class="flex flex-row items-center gap-2 font-semibold text-sm">
+				<Label class="flex flex-row items-center gap-2 text-sm font-semibold">
 					<span
-						>Default Thumbnail <span class="font-normal italic text-xs"
+						>Default Thumbnail <span class="text-xs font-normal italic"
 							>({MAX_FILE_THUMBNAIL_SIZE / BYTES_IN_MB}MB max)</span
 						>
 					</span>
@@ -175,7 +175,7 @@
 					for="dropzone-file"
 					class={cn(
 						showImage ? 'border-hidden' : 'border-dashed',
-						'flex flex-col relative items-center justify-center w-full h-64 border-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 duration-100'
+						'relative flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-gray-300 bg-gray-50 duration-100 hover:bg-gray-100'
 					)}
 				>
 					{#if showImage}
@@ -184,13 +184,13 @@
 							bind:this={thumbnailImage}
 							src=""
 							alt=""
-							class="absolute w-full h-full opacity-100 object-cover rounded-t-lg hover:opacity-75 duration-150"
+							class="absolute h-full w-full rounded-t-lg object-cover opacity-100 duration-150 hover:opacity-75"
 							draggable="false"
 						/>
 					{/if}
 					{#if !showImage}
-						<div class="flex flex-col items-center justify-center pt-5 pb-6">
-							<FileUploadIcon class="w-8 h-8 mb-4 text-gray-500" />
+						<div class="flex flex-col items-center justify-center pb-6 pt-5">
+							<FileUploadIcon class="mb-4 h-8 w-8 text-gray-500" />
 							<p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
 								{#if fileName}
 									<span>File Uploaded: <span class="font-semibold">{fileName}</span></span>
@@ -218,12 +218,12 @@
 				</Label>
 				{#if showImage}
 					<div
-						class="flex flex-col gap-1 justify-start items-center px-4 pt-2 relative -top-3 w-full h-[5rem] bg-gray-200 rounded-b-md"
+						class="relative -top-3 flex h-[5rem] w-full flex-col items-center justify-start gap-1 rounded-b-md bg-gray-200 px-4 pt-2"
 					>
-						<span class="font-bold text-sm text-black w-full"
+						<span class="w-full text-sm font-bold text-black"
 							>{organizationDomain} - Example Title</span
 						>
-						<span class="text-xs text-gray-500 w-full">
+						<span class="w-full text-xs text-gray-500">
 							This image will be used as the default thumbnail for routes that don't have a
 							corresponding OpenGraph image.
 						</span>
@@ -233,7 +233,7 @@
 			<Button
 				variant="default"
 				type="submit"
-				class="bg-sky-400 hover:bg-sky-500 hover:ring-2 hover:ring-sky-500 hover:ring-offset-white hover:ring-offset-2 duration-150 transition-all"
+				class="bg-sky-400 transition-all duration-150 hover:bg-sky-500 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:ring-offset-white"
 			>
 				{#if isCreating}
 					<LoadingSpinner />
