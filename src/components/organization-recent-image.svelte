@@ -85,7 +85,7 @@
 							class="flex h-full max-h-[4rem] w-full flex-col items-start justify-center gap-1 px-4 py-1"
 						>
 							<span class="text-sm font-medium capitalize leading-none"
-								>{organization} - Example Route Title</span
+								>{organization} - Lorem ipsum dolor sit amet</span
 							>
 							<div
 								class="flex flex-row items-center justify-center gap-2 text-xsplus text-gray-500"
@@ -115,7 +115,7 @@
 						>
 							<span class="text-xxs uppercase leading-none text-gray-500">{domain}</span>
 							<span class="text-sm font-medium capitalize leading-none"
-								>{organization} - Example Route Title</span
+								>{organization} - Lorem ipsum dolor sit amet</span
 							>
 							<div
 								class="flex flex-row items-center justify-center gap-2 text-xsplus text-gray-500"
@@ -144,13 +144,13 @@
 							>
 								<span class="rounded-sm text-xs">{organization}</span>
 								<span>-</span>
-								<span class="rounded-sm text-xs">Example Route Title</span>
+								<span class="rounded-sm text-xs">Lorem ipsum dolor sit amet</span>
 							</div>
 						</a>
 					</div>
 				</Tabs.Content>
 			</Tabs.Root>
-			<div class="h-fit w-[30rem] rounded-md bg-gray-300">
+			<div class="h-[22.75rem] w-[30rem] rounded-md bg-gray-300">
 				<CodeBlock {organization} route={route.route} {domain} />
 			</div>
 			<div

@@ -60,7 +60,7 @@
 	</div>
 	<div class="h-full w-full">
 		<div class="flex w-full flex-col items-start justify-center gap-2">
-			<!-- TODO: Explain what a sitemap file is. -->
+			<!-- TODO: Explain what a sitemap file is, limit input to only allow sitemap url that includes organization domain. -->
 			<Label for="sitemap-url">Sitemap URL:</Label>
 			<Input
 				type="url"

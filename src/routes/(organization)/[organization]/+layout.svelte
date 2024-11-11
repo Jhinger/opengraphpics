@@ -8,7 +8,6 @@
 
 	const { children } = $props<{ children: Snippet }>();
 
-	// TODO: evaluate setting Organization Context vs just passing value from layout.
 	const organizationContext = createOrganizationContext({
 		organizationMetadata: $page.data.organizationMetadata,
 		organizationUsers: $page.data.organizationUsers,
